@@ -14,12 +14,14 @@ SOURCE := $(wildcard $(SRC_DIR)/*.c)
 OBJECT := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.o,$(SOURCE))
 DEPEND := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.d,$(SOURCE))
 
+LDLIBS := -lncurses
+
 OUTPUT := adhd_game
 
 .DEFAULT_GOAL = $(OUTPUT)
 
 $(OUTPUT): $(OBJECT)
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ $(LDLIBS)
 
 $(OBJECT): $(OUT_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) -o $@ -c $< -I $(INC_DIR)/
