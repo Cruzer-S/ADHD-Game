@@ -12,7 +12,7 @@ struct player {
 	int level;
 };
 
-Player player_create(char name[restrict PLAYER_NAME_MAX])
+Player player_create(char name[PLAYER_NAME_MAX])
 {
 	Player player;
 
