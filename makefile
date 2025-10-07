@@ -14,7 +14,7 @@ SOURCE := $(wildcard $(SRC_DIR)/*.c)
 OBJECT := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.o,$(SOURCE))
 DEPEND := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.d,$(SOURCE))
 
-LDLIBS := -lncurses
+LDLIBS := -lncurses -lpanel
 
 OUTPUT := adhd_game
 
