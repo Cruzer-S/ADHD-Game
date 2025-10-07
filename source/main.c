@@ -10,6 +10,7 @@
 int main(void)
 {
 	Player player;
+	int key;
 
 	player = player_create((char [PLAYER_NAME_MAX]) { "player" });
 	if (player == NULL)
@@ -20,16 +21,11 @@ int main(void)
 	screen_setup();
 
 	do {
-		int key;
-
 		screen_draw_map(temp_map);
 		screen_draw_object(player_as_object(player));
 
 		key = screen_get_input();
-
-		if (key == EOF)
-			break;
-	} while (false);
+	} while (key != '\n');
 
 	screen_cleanup();
 
