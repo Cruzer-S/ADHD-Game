@@ -5,6 +5,10 @@
 void screen_setup(void)
 {
 	initscr();
+	cbreak();
+	noecho();
+
+	curs_set(0);
 }
 
 void screen_draw_map(Map map)
