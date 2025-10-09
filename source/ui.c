@@ -62,6 +62,11 @@ static void ui_draw(UI ui)
 	}
 }
 
+static void ui_clear(UI ui)
+{
+	werase(panel_window(ui->panel));
+}
+
 UI ui_create(int x, int y, int width, int height)
 {
 	UI ui;
@@ -80,11 +85,6 @@ UI ui_create(int x, int y, int width, int height)
 	ui_draw(ui);
 
 	return ui;
-}
-
-void ui_clear(UI ui)
-{
-	werase(panel_window(ui->panel));
 }
 
 int ui_add_string(UI ui, int x, int y, char *string, int n)
@@ -215,6 +215,11 @@ void ui_resize(UI ui, int width, int height)
 	delwin(oldwin);
 
 	ui_draw(ui);
+}
+
+void ui_update(void)
+{
+	update_panels();
 }
 
 void ui_destroy(UI ui)

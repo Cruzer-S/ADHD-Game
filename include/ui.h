@@ -28,6 +28,8 @@ int ui_get_height(UI );
 void ui_move(UI , int x, int y);
 void ui_resize(UI , int width, int height);
 
+void ui_update(void);
+
 void ui_destroy(UI );
 
 #endif
