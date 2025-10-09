@@ -47,8 +47,6 @@ int main(void)
 	Object p_obj;
 
 	UI board, panel;
-	int map_width, map_height;
-	int map_x, map_y;
 
 	player = player_create((char [16]){ "temp" });
 	p_obj = player_as_object(player);
@@ -58,11 +56,6 @@ int main(void)
 
 	screen_setup();
 
-	map_x = 1;
-	map_y = 1;
-	map_width = map_get_size_x(temp_map);
-	map_height = map_get_size_y(temp_map);
-
 	board = ui_create(SCREEN_XSTART(BOARD), SCREEN_YSTART(BOARD),
 		   	  SCREEN_CSIZE(BOARD), SCREEN_RSIZE(BOARD));
 	panel = ui_create(SCREEN_XSTART(UI), SCREEN_YSTART(UI),
@@ -70,6 +63,8 @@ int main(void)
 
 	int ch;
 	do {
+		int map_x = SCREEN_XSTART(BOARD) + 1;
+		int map_y = SCREEN_YSTART(BOARD) + 1;
 		int x, y;
 
 		screen_draw_ui();
