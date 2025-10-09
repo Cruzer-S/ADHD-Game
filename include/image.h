@@ -3,8 +3,9 @@
 
 enum image {
 	IMAGE_SPACE = 0,
-	IMAGE_GRASS = 1,
-	IMAGE_PLAYER = 2,
+	IMAGE_GRASS,
+	IMAGE_PLAYER,
+	IMAGE_ROCK,
 
 	IMAGE_SIZE
 };

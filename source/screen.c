@@ -17,7 +17,7 @@ void screen_draw_map(int start_x, int start_y, Map map)
 	for (int y = 0; y < map_get_size_y(map); y++)
 		for (int x = 0; x < map_get_size_x(map); x++)
 			mvaddch(start_y + y, start_x + x,
-	   			img2chr[map_get_image(map, x, y)]);
+	   			img2chr[map_get_tile(map, x, y)->image]);
 }
 
 void screen_draw_object(Object obj)
