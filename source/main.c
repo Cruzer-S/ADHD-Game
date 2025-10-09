@@ -48,6 +48,9 @@ int main(void)
 
 	UI board, panel;
 
+	char ui_name[BUFSIZ];
+	char ui_level[BUFSIZ];
+
 	player = player_create((char [16]){ "temp" });
 	p_obj = player_as_object(player);
 
@@ -60,6 +63,12 @@ int main(void)
 		   	  SCREEN_CSIZE(BOARD), SCREEN_RSIZE(BOARD));
 	panel = ui_create(SCREEN_XSTART(UI), SCREEN_YSTART(UI),
 		   	  SCREEN_CSIZE(UI), SCREEN_RSIZE(UI));
+
+	snprintf(ui_name, BUFSIZ, "name: %s", player_get_name(player));
+	ui_add_string(panel, 1, 0, ui_name, BUFSIZ);
+
+	snprintf(ui_level, BUFSIZ, "level: %d", player_get_level(player));
+	ui_add_string(panel, 1, 1, ui_level, BUFSIZ);
 
 	int ch;
 	do {
@@ -90,6 +99,9 @@ int main(void)
 	} while (ch != '\n');
 
 	player_destroy(player);
+
+	ui_del_string(panel, ui_name);
+	ui_del_string(panel, ui_level);
 
 	ui_destroy(panel);
 	ui_destroy(board);
