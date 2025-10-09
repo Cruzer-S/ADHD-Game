@@ -4,6 +4,22 @@
 
 #include <ncurses.h>
 
+bool check_movable(Map map, int x, int y)
+{
+	int width, height;
+
+	width = map_get_size_x(temp_map);
+	height = map_get_size_y(temp_map);
+
+	if (x < 0 || x >= width)
+		return false;
+
+	if (y < 0 || y >= height)
+		return false;
+
+	return map_get_tile(map, x, y)->passable;
+}
+
 int main(void)
 {
 	Player player;
@@ -11,6 +27,7 @@ int main(void)
 
 	UI map_border, user_panel;
 	int map_width, map_height;
+	int map_x, map_y;
 
 	player = player_create((char [16]){ "temp" });
 	p_obj = player_as_object(player);
@@ -20,6 +37,8 @@ int main(void)
 
 	screen_setup();
 
+	map_x = 1;
+	map_y = 1;
 	map_width = map_get_size_x(temp_map);
 	map_height = map_get_size_y(temp_map);
 
@@ -31,7 +50,7 @@ int main(void)
 		int x, y;
 
 		screen_draw_ui();
-		screen_draw_map(1, 1, temp_map);
+		screen_draw_map(map_x, map_y, temp_map);
 		screen_draw_object(p_obj);
 
 		ch = screen_get_input();
@@ -46,8 +65,10 @@ int main(void)
 		case KEY_DOWN:	y++; break;
 		}
 
-		object_set_x(p_obj, x);
-		object_set_y(p_obj, y);
+		if (check_movable(temp_map, x - map_x, y - map_y)) {
+			object_set_x(p_obj, x);
+			object_set_y(p_obj, y);
+		}
 	} while (ch != '\n');
 
 	player_destroy(player);
