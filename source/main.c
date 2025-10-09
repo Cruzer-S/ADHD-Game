@@ -50,6 +50,8 @@ int main(void)
 		object_set_y(p_obj, y);
 	} while (ch != '\n');
 
+	player_destroy(player);
+
 	ui_destroy(user_panel);
 	ui_destroy(map_border);
 
