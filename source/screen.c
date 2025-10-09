@@ -7,6 +7,7 @@ void screen_setup(void)
 	initscr();
 	cbreak();
 	noecho();
+	keypad(stdscr, true);
 
 	curs_set(0);
 }
