@@ -12,11 +12,12 @@ void screen_setup(void)
 	curs_set(0);
 }
 
-void screen_draw_map(Map map)
+void screen_draw_map(int start_x, int start_y, Map map)
 {
 	for (int y = 0; y < map_get_size_y(map); y++)
 		for (int x = 0; x < map_get_size_x(map); x++)
-			mvaddch(y, x, img2chr[map_get_image(map, x, y)]);
+			mvaddch(start_y + y, start_x + x,
+	   			img2chr[map_get_image(map, x, y)]);
 }
 
 void screen_draw_object(Object obj)
@@ -30,6 +31,17 @@ void screen_draw_object(Object obj)
 	image = object_get_image(obj);
 
 	mvaddch(y, x, img2chr[image]);
+}
+
+void screen_add_ui(UI ui)
+{
+	// do nothing
+}
+
+void screen_draw_ui(void)
+{
+	ui_update();
+	doupdate();
 }
 
 void screen_cleanup(void)
