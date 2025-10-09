@@ -7,12 +7,16 @@
 int main(void)
 {
 	Player player;
+	Object p_obj;
+
 	UI map_border, user_panel;
 	int map_width, map_height;
 
 	player = player_create((char [16]){ "temp" });
-	object_set_x(player_as_object(player), 4);
-	object_set_y(player_as_object(player), 5);
+	p_obj = player_as_object(player);
+
+	object_set_x(p_obj, 4);
+	object_set_y(p_obj, 5);
 
 	screen_setup();
 
@@ -24,20 +28,16 @@ int main(void)
 
 	int ch;
 	do {
-		Object object;
-
-		object = player_as_object(player);
+		int x, y;
 
 		screen_draw_ui();
 		screen_draw_map(1, 1, temp_map);
-		screen_draw_object(object);
+		screen_draw_object(p_obj);
 
 		ch = screen_get_input();
 
-		int x, y;
-
-		x = object_get_x(object);
-		y = object_get_y(object);
+		x = object_get_x(p_obj);
+		y = object_get_y(p_obj);
 
 		switch (ch) {
 		case KEY_LEFT:	x--; break;
@@ -46,8 +46,8 @@ int main(void)
 		case KEY_DOWN:	y++; break;
 		}
 
-		object_set_x(object, x);
-		object_set_y(object, y);
+		object_set_x(p_obj, x);
+		object_set_y(p_obj, y);
 	} while (ch != '\n');
 
 	ui_destroy(user_panel);
