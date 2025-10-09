@@ -4,7 +4,7 @@
 
 #include <ncurses.h>
 
-bool check_movable(Map map, int x, int y)
+static bool check_movable(Map map, int x, int y)
 {
 	int width, height;
 
