@@ -15,6 +15,7 @@ OBJECT := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.o,$(SOURCE))
 DEPEND := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.d,$(SOURCE))
 
 LDLIBS := -lncurses -lpanel
+CFLAGS := -g
 
 OUTPUT := adhd_game
 
@@ -24,10 +25,10 @@ $(OUTPUT): $(OBJECT)
 	$(CC) -o $@ $^ $(LDLIBS)
 
 $(OBJECT): $(OUT_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) -o $@ -c $< -I $(INC_DIR)/
+	$(CC) -o $@ -c $< -I $(INC_DIR)/ $(CFLAGS)
 
 $(DEPEND): $(OUT_DIR)/%.d: $(SRC_DIR)/%.c
-	$(CC) -c $< -I $(INC_DIR)/ -MG -MM > $@
+	$(CC) -c $< -I $(INC_DIR)/ -MG -MM $(CFLAGS) > $@
 
 $(OBJECT) $(DEPEND): | $(OUT_DIR)
 $(OUT_DIR):
