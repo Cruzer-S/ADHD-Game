@@ -7,12 +7,14 @@ RM := rm -rf
 MKDIR := mkdir -p
 CREAT := touch
 ECHO := echo
+TAGS := ctags
 
-PROJDB := compile_commands.json .cache
+PROJDB := compile_commands.json .cache tags
 
 SOURCE := $(wildcard $(SRC_DIR)/*.c)
 OBJECT := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.o,$(SOURCE))
 DEPEND := $(patsubst $(SRC_DIR)/%.c,$(OUT_DIR)/%.d,$(SOURCE))
+HEADER := $(wildcard $(INC_DIR)/*.h)
 
 LDLIBS := -lncurses -lpanel
 CFLAGS := -g
@@ -41,6 +43,10 @@ all: $(OUTPUT)
 clean:
 	$(RM) $(OUT_DIR)/
 	$(RM) $(OUTPUT)
+
+.PHONY: tags
+tags:
+	$(TAGS) $(SOURCE) $(HEADER)
 
 .PHONY: gitignore
 gitignore:
